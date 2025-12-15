@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Project Visi Komputer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <style>
+        /* Reset CSS sederhana */
+        * { box-sizing: border-box; }
+
+        body {
+            background-color: #f0eee6; /* Warna background untuk desktop */
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #4a4a4a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Container Utama - Gaya Default untuk HP (Full Screen) */
+        .main-container {
+            background-color: #ffffff;
+            width: 100%;
+            min-height: 100vh; /* Memenuhi tinggi layar HP */
+            padding: 40px 25px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Konten rata tengah secara vertikal */
+            align-items: center;
+        }
+
+        /* Tipografi */
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem; /* Ukuran font lebih besar untuk HP */
+            color: #c59d5f; /* Warna emas */
+            margin: 15px 0;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0;
+            color: #888;
+        }
+
+        .details p {
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+        
+        .details strong {
+            font-size: 1.3rem;
+            color: #222;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #c59d5f, transparent);
+            width: 70%;
+            margin: 30px auto;
+        }
+
+        /* Styling Area QR Code agar Jelas */
+        #qrcode-wrapper {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fcfcfc;
+            border: 2px dashed #c59d5f; /* Bingkai putus-putus emas */
+            border-radius: 15px;
+            display: inline-block; /* Agar bingkai mengikuti konten */
+        }
+
+        /* Membuat gambar QR Code responsif dan besar */
+        #qrcode img {
+            width: 100%; /* Memenuhi wrapper */
+            height: auto;
+            max-width: 220px; /* Batas maksimal agar tidak terlalu raksasa di tablet */
+            display: block; /* Menghilangkan gap di bawah gambar */
+        }
+
+        .scan-hint {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #c59d5f;
+            font-weight: 600;
+        }
+
+        /* --- MEDIA QUERY UNTUK LAYAR BESAR (Laptop/Tablet) --- */
+        /* Jika layar lebih lebar dari 768px, ubah menjadi tampilan kartu */
+        @media (min-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            .main-container {
+                max-width: 450px; /* Lebar kartu tetap */
+                min-height: auto; /* Tinggi menyesuaikan konten */
+                border-radius: 25px;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.1); /* Tambah bayangan */
+                padding: 50px;
+            }
+            h1 { font-size: 3.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <h2>UJI COBA</h2>
+        <h1>Autentikasi QR Code</h1>
+        
+        <div class="divider"></div>
+        
+        <div class="details">
+            <p>Jumat</p>
+            <p><strong>19.12.2025</strong></p>
+            <p>Pukul 13.00 WIB</p>
+            <p style="margin-top: 20px;">Universitas Airlangga</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <p>Pengujian untuk QR Asli.</p>
+
+        <div id="qrcode-wrapper">
+            <div id="qrcode"></div>
+        </div>
+    </div>
+
+    <script>
+        // JAVASCRIPT GENERATOR QR CODE
+        
+        var currentUrl = window.location.href;
+
+        // Membuat QR Code dengan ukuran dasar yang lebih besar (200x200)
+        // CSS akan menanganinya agar responsif di layar HP
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            text: currentUrl,
+            width: 200, 
+            height: 200,
+            colorDark : "#000000", // QR hitam pekat agar kontras tinggi
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.Q // Tingkat koreksi kesalahan yang lebih tinggi
+        });
+
+        // Tambahan: Memastikan tampilan mulus saat di-load
+        document.getElementById('qrcode').getElementsByTagName('img')[0].onload = function() {
+           this.style.display = 'block'; // Mencegah 'kedip' saat gambar dibuat
+        };
+
+    </script>
+
+</body>
+</html>
